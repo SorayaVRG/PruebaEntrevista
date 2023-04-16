@@ -1,0 +1,32 @@
+﻿@model prueba.Models.Trabajador
+
+@{
+    ViewData["Title"] = "Editar Trabajador";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Edit">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Trabajador</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+    </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="TipoDocumento">Tipo de Documento</label>
+            <div class="col-md-10">
+                <select class="form-control" id="TipoDocumento" name="TipoDocumento">
+                    <option value="DNI" @(Model.TipoDocumento == "DNI" ? "selected" : "")>DNI</option>
+                    <option value="Carnet Extranjería" @(Model.TipoDocumento == "Carnet Extranjería" ? "selected" : "")>Carnet Extranjería</option>
+                </select>
+                <span class="text-danger field-validation-valid" data-valmsg-for="TipoDocumento" data-valmsg-replace="true"></span>
+            </div>
+    </div>
+
+        <div class="form-group">
+        <label class="control-label" col-md-2></label>
+        </div>
+        </form>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<prueba.Models.Trabajador>
+
+@{
+    ViewBag.Title = "Lista de trabajadores";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearModal">
+        Crear nuevo
+    </button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.TipoDocumento)</th>
+            <th>@Html.DisplayNameFor(model => model.NumeroDocumento)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombres)</th>
+            <th>@Html.DisplayNameFor(model => model.Sexo)</th>
+            <th>@Html.DisplayNameFor(model => model.Departamento)</th>
+            <th>@Html.DisplayNameFor(model => model.Provincia)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var color = item.Sexo.Equals("Masculino") ? "table-primary" : "table-warning";
+            <tr class="@color">
+                <td>@Html.DisplayFor(modelItem => item.TipoDocumento)</td>
+                <td>@Html.DisplayFor(modelItem => item.NumeroDocumento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombres)</td>
+                <td>@Html.DisplayFor(modelItem => item.Sexo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Departamento)</td>
+                <td>@Html.DisplayFor(modelItem => item.Provincia)</td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editarModal" data-id="@item.Id" data-tipodocumento="@item.TipoDocumento" data-numerodocumento="@item.NumeroDocumento" data-nombres="@item.Nombres" data-sexo="@item.Sexo" data-departamento="@item.Departamento" data-provincia="@item.Provincia">
+                        Editar
+                    </button>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#eliminarModal" data-id="@item.Id">
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal para crear trabajador -->
+<div class="modal fade" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="crearModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearModalLabel">Crear nuevo trabajador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_CrearTrabajadorPartial")
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar trabajador -->
+<div class="modal fade" id="editarModal" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarModalLabel">Editar trabajador</h5>
+                <button type=""></button>
+            </div>
+        </div>
+    </div>
+</div>
